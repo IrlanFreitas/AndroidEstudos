@@ -1,0 +1,7 @@
+Activies são semelhantes ao comportamento da tela (Seriam como manageds beans).
+Essa activities tem ciclos de vida, e são importantes para o funcionamento.
+
+Diretório R (Resources) - Recursos do Android, classe R, gerada automaticamente para que se possa
+acessar os arquivos.
+
+Layout (Arquivo.xml) - Arquivos relacionados ao design da tela.
