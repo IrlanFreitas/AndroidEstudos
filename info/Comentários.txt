@@ -5,3 +5,17 @@ Diretório R (Resources) - Recursos do Android, classe R, gerada automaticamente 
 acessar os arquivos.
 
 Layout (Arquivo.xml) - Arquivos relacionados ao design da tela.
+
+Dúvidas sobre o Funcionamento do Gradle (Inicialmente sei que é programavel e similiar ao Maven no gerenciamento de dependências).
+
+findViewById(R.id.listaAlunos) - Método herdado pelo AppCompatActivity necessário para encontrar os elementos da View e utiliza-lo
+no código java(do xml para o java) e poder manipular.
+
+Relacionado ao Layout.xml:
+
+wrap_content: Constante do xml que indica envolver o conteúdo, o elemento ficará do tamanho do elemento que está dentro.
+
+match_parent: Constante do xml que indica que o tamanho será herdado do elemento pai, quando se é o ultimo elemento com essa constante
+ele irá herdar a largura da tela.
+
+RelativeLayout, LinearLayout, ConstraintLayout são alguns do layout responsáveis para dispor os elementos na tela cada um a sua forma.
