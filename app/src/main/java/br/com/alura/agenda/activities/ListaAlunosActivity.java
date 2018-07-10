@@ -1,9 +1,11 @@
-package br.com.alura.agenda;
+package br.com.alura.agenda.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import br.com.alura.agenda.R;
 
 public class ListaAlunosActivity extends AppCompatActivity {
 

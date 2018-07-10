@@ -1,21 +1,51 @@
-Activies s„o semelhantes ao comportamento da tela (Seriam como manageds beans).
-Essa activities tem ciclos de vida, e s„o importantes para o funcionamento.
+Activies s√£o semelhantes ao comportamento da tela (Seriam como manageds beans).
+Essa activities tem ciclos de vida, e s√£o importantes para o funcionamento.
 
-DiretÛrio R (Resources) - Recursos do Android, classe R, gerada automaticamente para que se possa
+Diret√≥rio R (Resources) - Recursos do Android, classe R, gerada automaticamente para que se possa
 acessar os arquivos.
 
 Layout (Arquivo.xml) - Arquivos relacionados ao design da tela.
 
-D˙vidas sobre o Funcionamento do Gradle (Inicialmente sei que È programavel e similiar ao Maven no gerenciamento de dependÍncias).
+D√∫vidas sobre o Funcionamento do Gradle (Inicialmente sei que √© programavel e similiar ao Maven no gerenciamento de depend√™ncias).
 
-findViewById(R.id.listaAlunos) - MÈtodo herdado pelo AppCompatActivity necess·rio para encontrar os elementos da View e utiliza-lo
-no cÛdigo java(do xml para o java) e poder manipular.
+findViewById(R.id.listaAlunos) - M√©todo herdado pelo AppCompatActivity necess√°rio para encontrar os elementos da View e utiliza-lo
+no c√≥digo java(do xml para o java) e poder manipular.
 
 Relacionado ao Layout.xml:
 
-wrap_content: Constante do xml que indica envolver o conte˙do, o elemento ficar· do tamanho do elemento que est· dentro.
+	wrap_content: Constante do xml que indica envolver o conte√∫do, o elemento ficar√° do tamanho do elemento que est√° dentro.
 
-match_parent: Constante do xml que indica que o tamanho ser· herdado do elemento pai, quando se È o ultimo elemento com essa constante
-ele ir· herdar a largura da tela.
+	match_parent: Constante do xml que indica que o tamanho ser√° herdado do elemento pai, quando se √© o ultimo elemento com essa constante
+	ele ir√° herdar a largura da tela.
 
-RelativeLayout, LinearLayout, ConstraintLayout s„o alguns do layout respons·veis para dispor os elementos na tela cada um a sua forma.
+	RelativeLayout, LinearLayout, ConstraintLayout s√£o alguns do layout respons√°veis para dispor os elementos na tela cada um a sua forma.
+
+
+Adapters: S√£o utilizados para converter dados em elementos de layout como textview's sem que seja feito o c√≥digo de uma lista inteira na m√£o
+
+
+Unidade de Medidas:
+	
+	Link: https://pt.stackoverflow.com/questions/295/qual-a-diferen%C3%A7a-entre-px-dp-dip-and-sp
+	
+	Wrap_Content, Match_Parent, Dp, Px
+	
+AndroidManifest.xml - Arquivo de configura√ß√£o geral do app, intent-filter, permiss√µes, indica√ß√µes de activities.
+
+
+Tratando os eventos de click:
+
+Necess√°rio obter uma instancia do elemento, que poder ser bot√£o, item da lista etc.
+
+Button btnSalvar = findViewById(R.id.formulario_btn_salvar);
+
+//Necess√°rio uma classe an√¥nima
+btnSalvar.setOnClickListener(new View.OnClickListener() {
+			
+			//Sobrescrevendo o m√©todo de click com alguma a√ß√£o
+            @Override
+            public void onClick(View view) {
+                aluno = obterDados();
+                Toast.makeText(view.getContext(), aluno.toString(), Toast.LENGTH_SHORT).show();
+            }
+        })
