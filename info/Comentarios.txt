@@ -13,6 +13,8 @@ no código java(do xml para o java) e poder manipular.
 
 Relacionado ao Layout.xml:
 
+	Playlist somente sobre Layout: https://www.youtube.com/watch?v=2b18zJmkKKU&list=PLBA57K2L2RIIfuOmp9T4YL0Sjpnvg-DH3
+
 	wrap_content: Constante do xml que indica envolver o conteúdo, o elemento ficará do tamanho do elemento que está dentro.
 
 	match_parent: Constante do xml que indica que o tamanho será herdado do elemento pai, quando se é o ultimo elemento com essa constante
@@ -32,20 +34,33 @@ Unidade de Medidas:
 	
 AndroidManifest.xml - Arquivo de configuração geral do app, intent-filter, permissões, indicações de activities.
 
-
 Tratando os eventos de click:
 
-Necessário obter uma instancia do elemento, que poder ser botão, item da lista etc.
+	Necessário obter uma instancia do elemento, que poder ser botão, item da lista etc.
 
-Button btnSalvar = findViewById(R.id.formulario_btn_salvar);
+	Button btnSalvar = findViewById(R.id.formulario_btn_salvar);
 
-//Necessário uma classe anônima
-btnSalvar.setOnClickListener(new View.OnClickListener() {
-			
-			//Sobrescrevendo o método de click com alguma ação
-            @Override
-            public void onClick(View view) {
-                aluno = obterDados();
-                Toast.makeText(view.getContext(), aluno.toString(), Toast.LENGTH_SHORT).show();
-            }
-        })
+	//Necessário uma classe anônima
+	btnSalvar.setOnClickListener(new View.OnClickListener() {
+				
+				//Sobrescrevendo o método de click com alguma ação
+				@Override
+				public void onClick(View view) {
+					aluno = obterDados();
+					Toast.makeText(view.getContext(), aluno.toString(), Toast.LENGTH_SHORT).show();
+				}
+			})
+		
+		
+Modificação de LinearLayout para RelativeLayout na tela de Listar Alunos para que os elementos
+sejam colocados em referencia de posição um ao outro.
+
+Intent: {
+	Link: https://www.youtube.com/watch?v=2b18zJmkKKU&list=PLBA57K2L2RIIfuOmp9T4YL0Sjpnvg-DH3
+	Classe e indica que se quer fazer algo, utilizar algum recurso do android, ir para outra Activity...
+}
+
+Inflate: {
+	Link: http://blog.caelum.com.br/conhecendo-melhor-o-metodo-inflate/
+}
+

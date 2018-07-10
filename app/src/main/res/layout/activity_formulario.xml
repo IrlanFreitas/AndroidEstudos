@@ -44,11 +44,11 @@
             android:max="10"
             android:numStars="5" />
 
-        <Button
+        <!--<Button
             android:id="@+id/formulario_btn_salvar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Salvar" />
+            android:text="Salvar" />-->
 
     </LinearLayout>
 </ScrollView>

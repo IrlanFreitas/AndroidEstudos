@@ -11,11 +11,6 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".activities.ListaAlunosActivity">
-
-        </activity>
-
-        <activity android:name=".activities.FormularioActivity"
-                android:label="@string/app_form_name" >
             <!-- Intenções do App são designados pelo Intent Filter -->
             <intent-filter>
 
@@ -27,6 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activities.FormularioActivity"
+            android:label="@string/app_form_name" />
     </application>
 
 </manifest>
