@@ -64,3 +64,17 @@ Inflate: {
 	Link: http://blog.caelum.com.br/conhecendo-melhor-o-metodo-inflate/
 }
 
+Views: {
+	Link: https://youtu.be/2b18zJmkKKU?list=PLBA57K2L2RIIfuOmp9T4YL0Sjpnvg-DH3
+}
+
+
+Ciclo de Vida das Activies {
+
+	Links: 
+		https://www.devmedia.com.br/entendendo-o-ciclo-de-vida-de-uma-aplicacao-android/22922
+		https://developer.android.com/guide/components/activities?hl=pt-br
+		https://developer.android.com/training/basics/activity-lifecycle/?hl=pt-br
+}
+
+

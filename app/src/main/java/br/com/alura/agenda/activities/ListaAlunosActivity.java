@@ -7,10 +7,21 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.alura.agenda.R;
+import br.com.alura.agenda.dao.AlunoDAO;
+import br.com.alura.agenda.models.Aluno;
 
 public class ListaAlunosActivity extends AppCompatActivity {
+
+    private AlunoDAO alunoDAO;
+
+    private ListView listaAlunos;
 
     //Método sobrescrito baseado no ciclo de vida da Atividade (Activity)
     @Override
@@ -23,20 +34,11 @@ public class ListaAlunosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_alunos);
 
         /*Em vez de usar o TextView para cada um dos elementos
-        * melhor usar um ListView para uma lista de elementos como
-        * TextView. */
-        ListView listaAlunos = (ListView) findViewById(R.id.lista_alunos);
+         * melhor usar um ListView para uma lista de elementos como
+         * TextView. */
+        listaAlunos = (ListView) findViewById(R.id.lista_alunos);
 
-        String[] alunos = {"Irlan", "Dandara", "Elizete", "Luka"};
-
-        /*Sobre o ArrayAdapter
-        * necessário passar no construtor, o contexto - que é a atual Activity
-        * depois o layout da lista, e como não temos passarei um layout pronto do próprio android
-        * e depois a fonte de dados */
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, alunos);
-
-        //Adicionando o Adapter a ListView
-        listaAlunos.setAdapter(adapter);
+        alunoDAO = new AlunoDAO(this);
 
         Button btnAdicionar = findViewById(R.id.lista_alunos_btn_adicionar);
 
@@ -49,5 +51,22 @@ public class ListaAlunosActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        carregarLista();
+    }
+
+    private void carregarLista() {
+        /*Sobre o ArrayAdapter
+         * necessário passar no construtor, o contexto - que é a atual Activity
+         * depois o layout da lista, e como não temos passarei um layout pronto do próprio android
+         * e depois a fonte de dados */
+        ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunoDAO.getAlunos());
+
+        //Adicionando o Adapter a ListView
+        listaAlunos.setAdapter(adapter);
     }
 }
