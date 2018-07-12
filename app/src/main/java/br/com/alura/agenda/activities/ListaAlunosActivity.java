@@ -3,7 +3,10 @@ package br.com.alura.agenda.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -15,6 +18,7 @@ import java.util.List;
 
 import br.com.alura.agenda.R;
 import br.com.alura.agenda.dao.AlunoDAO;
+import br.com.alura.agenda.helpers.FormularioHelper;
 import br.com.alura.agenda.models.Aluno;
 
 public class ListaAlunosActivity extends AppCompatActivity {
@@ -38,6 +42,17 @@ public class ListaAlunosActivity extends AppCompatActivity {
          * TextView. */
         listaAlunos = (ListView) findViewById(R.id.lista_alunos);
 
+        listaAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> lista, View item, int position, long id) {
+
+                Aluno aluno = (Aluno) lista.getItemAtPosition(position);
+                Intent vaiParaFormulario = new Intent(ListaAlunosActivity.this, FormularioActivity.class);
+                vaiParaFormulario.putExtra("aluno", aluno);
+                startActivity(vaiParaFormulario);
+            }
+        });
+
         alunoDAO = new AlunoDAO(this);
 
         Button btnAdicionar = findViewById(R.id.lista_alunos_btn_adicionar);
@@ -50,6 +65,9 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 startActivity(intentIrParaFormulario);
             }
         });
+
+        registerForContextMenu(listaAlunos);
+
 
     }
 
@@ -69,4 +87,44 @@ public class ListaAlunosActivity extends AppCompatActivity {
         //Adicionando o Adapter a ListView
         listaAlunos.setAdapter(adapter);
     }
+
+
+    /* Depois de registrado para o menu de contexto para a determinada view pela forma:
+
+        registerForContextMenu(listaAlunos);
+
+        As ações do menu de contexto são personalizadas, por esse método.
+    * */
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
+
+        menu.setHeaderTitle("Opções");
+
+        //Poderiamos fazer um inflate com um xml definindo os itens do menu
+        //mas será feito de outra forma.
+        MenuItem deletar = menu.add("Deletar");
+
+        deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+                Aluno aluno = (Aluno) listaAlunos.getItemAtPosition(info.position);
+                alunoDAO.deletar(aluno.getId());
+                carregarLista();
+                Toast.makeText(ListaAlunosActivity.this, "Aluno "+ aluno.getNome()+ " foi deletado com sucesso!", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+
+    }
+
+    //Caso tivesse inflado o xml, por aqui poderia achar o elemento
+//    @Override
+//    public boolean onContextItemSelected(MenuItem item) {
+//
+//        if (item.getItemId() == 1) {
+//            //do stuffs
+//        }
+//        return super.onContextItemSelected(item);
+//    }
 }

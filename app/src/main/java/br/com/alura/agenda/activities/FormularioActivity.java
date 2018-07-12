@@ -2,6 +2,7 @@ package br.com.alura.agenda.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,6 +27,14 @@ public class FormularioActivity extends AppCompatActivity {
         helper = new FormularioHelper(this);
 
         alunoDAO = new AlunoDAO(this);
+
+        //getIntent() devolve a intent que foi usada para abrir a activity
+        Aluno aluno = (Aluno)getIntent().getSerializableExtra("aluno");
+
+        if (aluno != null) {
+            Log.i("ALUNO", aluno.toString());
+            helper.preencherFormulario(aluno);
+        }
 
         //
         //Setando o comportamento de click do botão com o listener(escutador)
@@ -56,13 +65,20 @@ public class FormularioActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.formulario_menu_item_adicionar: {
 
-                Aluno aluno = helper.getAluno();
+                String acao = "";
 
-                alunoDAO.insere(aluno);
+                Aluno aluno = helper.getAluno();
+                if (aluno.getId() == null) {
+                    alunoDAO.inserir(aluno);
+                    acao = " Cadastrado com sucesso. ";
+                } else {
+                    alunoDAO.atualizar(aluno);
+                    acao = " Atualizado com sucesso. ";
+                }
 
                 //Mensagem que aparece abaixo como uma notificação
                 //FormularioActivity.this = view.getContext()
-                Toast.makeText(FormularioActivity.this, aluno.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(FormularioActivity.this, acao, Toast.LENGTH_SHORT).show();
 
                 //Finalizando a activity com o conceito de pilha do Android
                 finish();

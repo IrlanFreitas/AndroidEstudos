@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.List;
 import br.com.alura.agenda.models.Aluno;
 
 public class AlunoDAO extends SQLiteOpenHelper {
+
+    private static final String TABELA = "ALUNOS";
 
     public AlunoDAO(Context context) {
         //Agenda - Nome do banco, não tabela.
@@ -44,17 +47,11 @@ public class AlunoDAO extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public void insere(Aluno aluno){
+    public void inserir(Aluno aluno){
 
         SQLiteDatabase writable = getWritableDatabase();
 
-        ContentValues values = new ContentValues();
-
-        values.put("nome", aluno.getNome());
-        values.put("telefone" , aluno.getTelefone());
-        values.put("endereco", aluno.getEndereco());
-        values.put("site", aluno.getSite());
-        values.put("nota", aluno.getNota());
+        ContentValues values = pegaDados(aluno);
 
         writable.insert("Alunos", null, values);
 
@@ -85,6 +82,34 @@ public class AlunoDAO extends SQLiteOpenHelper {
         close();
 
         return alunos;
+    }
+
+    public void deletar(Long alunoId) {
+        SQLiteDatabase writable = getWritableDatabase();
+
+        writable.delete("Alunos", "id = ?", new String[]{alunoId.toString()});
+    }
+
+    public void atualizar(Aluno aluno) {
+        SQLiteDatabase writable = getWritableDatabase();
+
+        ContentValues values = pegaDados(aluno);
+
+        writable.update(TABELA, values, "id = ?", new String[]{aluno.getId().toString()});
+    }
+
+    @NonNull
+    private ContentValues pegaDados(Aluno aluno) {
+
+        ContentValues values = new ContentValues();
+
+        values.put("nome", aluno.getNome());
+        values.put("telefone", aluno.getTelefone());
+        values.put("endereco", aluno.getEndereco());
+        values.put("site", aluno.getSite());
+        values.put("nota", aluno.getNota());
+
+        return values;
     }
 
 }

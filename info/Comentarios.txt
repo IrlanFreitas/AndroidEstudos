@@ -78,3 +78,22 @@ Ciclo de Vida das Activies {
 }
 
 
+
+Editando alunos
+
+
+Lembrei de setar um menu de contexto para a lista, menu de contexto é quando se pressiona um item
+da lista e aparece um pop-up com as opções.
+
+com o método: registerForContextMenu
+
+Depois disso é obtido o local onde é clicado e com isso o aluno, depois de obtido o aluno foi
+criada um query no SQLi e passado de parametro.
+
+Menu de contexto é igual a click longo.
+
+Para tratar o click no item da lista existe um método, setOnItemClickListener que recebe a lista, item, posição, id
+
+
+
+
