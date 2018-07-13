@@ -1,3 +1,6 @@
+Curso Android I
+
+
 Activies são semelhantes ao comportamento da tela (Seriam como manageds beans).
 Essa activities tem ciclos de vida, e são importantes para o funcionamento.
 
@@ -96,4 +99,14 @@ Para tratar o click no item da lista existe um método, setOnItemClickListener q
 
 
 
+Curso Android II
 
+Intent implicitas, é desejado que uma ação seja feita porém não importa qual app irá responder a isso, e o 
+Uri define o que pode fazer, por exemplo, na opção:
+
+	Intent acessarSite = new Intent(Intent.ACTION_VIEW);
+                    
+Você poderia querer visualizar qualquer coisa, site, imagem, documento porém o Uri define o que é, pelo protocolo ou caminho,
+
+	acessarSite.setData(Uri.parse("http://" + aluno.getSite()));
+                   
