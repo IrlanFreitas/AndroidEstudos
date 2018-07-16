@@ -27,6 +27,7 @@ import br.com.alura.agenda.R;
 import br.com.alura.agenda.dao.AlunoDAO;
 import br.com.alura.agenda.helpers.FormularioHelper;
 import br.com.alura.agenda.models.Aluno;
+import br.com.alura.agenda.util.PadraoRequisicao;
 
 public class ListaAlunosActivity extends AppCompatActivity {
 
@@ -34,7 +35,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
     private ListView listaAlunos;
 
-    private final Integer CODIGO_REQUISICAO_LIGACAO = 9090;
+
 
     //Método sobrescrito baseado no ciclo de vida da Atividade (Activity)
     @Override
@@ -92,12 +93,14 @@ public class ListaAlunosActivity extends AppCompatActivity {
          * necessário passar no construtor, o contexto - que é a atual Activity
          * depois o layout da lista, e como não temos passarei um layout pronto do próprio android
          * e depois a fonte de dados */
+
+        //android.R.layout.simple_list_item_1 - Significa o layout de um item da lista, como o textview que apareceu
+
         ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunoDAO.getAlunos());
 
         //Adicionando o Adapter a ListView
         listaAlunos.setAdapter(adapter);
     }
-
 
     /* Depois de registrado para o menu de contexto para a determinada view pela forma:
 
@@ -127,7 +130,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
                     //RequestPermission é o pop-up que aparece para solicitar permissão
                     ActivityCompat.requestPermissions(ListaAlunosActivity.this,
                             new String[]{Manifest.permission.CALL_PHONE},
-                            CODIGO_REQUISICAO_LIGACAO);
+                            PadraoRequisicao.CODIGO_REQUISICAO_LIGACAO);
                 } else {
 
                     //Caso essa permissão já tenha sido obtida, é somente feita a chamada.
@@ -177,6 +180,13 @@ public class ListaAlunosActivity extends AppCompatActivity {
             });
         }
 
+        //Uma opção do menu somente para controle
+        MenuItem informacoes = menu.add("Informações");
+        Intent intentVaiParaInformacoes = new Intent(ListaAlunosActivity.this, InformacoesActivity.class);
+        intentVaiParaInformacoes.putExtra("aluno", aluno);
+        informacoes.setIntent(intentVaiParaInformacoes);
+
+
         //Poderiamos fazer um inflate com um xml definindo os itens do menu
         //mas será feito de outra forma.
         MenuItem deletar = menu.add("Deletar");
@@ -204,7 +214,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
         //Sabendo qual a permissão está foi solicitada e atendida ou não.
         //A depois disso acionando uma ação.
-        if (requestCode == CODIGO_REQUISICAO_LIGACAO) {
+        if (requestCode == PadraoRequisicao.CODIGO_REQUISICAO_LIGACAO) {
 
         }
 

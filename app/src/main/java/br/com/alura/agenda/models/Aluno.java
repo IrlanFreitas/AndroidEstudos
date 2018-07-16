@@ -10,6 +10,8 @@ public class Aluno implements Serializable {
     private String site;
     private String telefone;
     private Double nota;
+    private String caminhoFoto;
+
 
     public Aluno(String nome, String endereco, String telefone, String site, Double nota) {
         this.nome = nome;
@@ -23,14 +25,15 @@ public class Aluno implements Serializable {
 
     @Override
     public String toString() {
-        return "Aluno{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", endereco='" + endereco + '\'' +
-                ", site='" + site + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", nota=" + nota +
-                '}';
+        return id + " - " + nome;
+    }
+
+    public String getCaminhoFoto() {
+        return caminhoFoto;
+    }
+
+    public void setCaminhoFoto(String caminhoFoto) {
+        this.caminhoFoto = caminhoFoto;
     }
 
     public Long getId() {

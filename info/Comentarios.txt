@@ -109,4 +109,14 @@ Uri define o que pode fazer, por exemplo, na opção:
 Você poderia querer visualizar qualquer coisa, site, imagem, documento porém o Uri define o que é, pelo protocolo ou caminho,
 
 	acessarSite.setData(Uri.parse("http://" + aluno.getSite()));
+	
+	
+	
+Acontecerá um erro na hora em que for tirar a foto, segue o link de ajuda : {
+
+	https://cursos.alura.com.br/forum/topico-android-os-fileuriexposedexception-26773
+
+}
+
+
                    
