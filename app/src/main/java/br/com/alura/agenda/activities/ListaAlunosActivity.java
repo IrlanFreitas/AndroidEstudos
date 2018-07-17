@@ -33,10 +33,7 @@ import br.com.alura.agenda.util.PadraoRequisicao;
 public class ListaAlunosActivity extends AppCompatActivity {
 
     private AlunoDAO alunoDAO;
-
     private ListView listaAlunos;
-
-
 
     //Método sobrescrito baseado no ciclo de vida da Atividade (Activity)
     @Override
@@ -48,9 +45,10 @@ public class ListaAlunosActivity extends AppCompatActivity {
         //Ligação da tela(xml) com o comportamento(activity)
         setContentView(R.layout.activity_lista_alunos);
 
-        /*Em vez de usar o TextView para cada um dos elementos
-         * melhor usar um ListView para uma lista de elementos como
-         * TextView. */
+        /* Modificação de TextView para ListView */
+        // Em vez de usar o TextView para cada um dos elementos
+        // melhor usar um ListView para uma lista de elementos como
+        // TextView.
         listaAlunos = (ListView) findViewById(R.id.lista_alunos);
 
         listaAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -71,6 +69,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
         btnAdicionar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /* Intent Explícita */
                 //Declarando a intenção para o Android gerenciar.
                 //Intent Explícita é declarado exatamente de onde você está e quer ir;
                 Intent intentIrParaFormulario = new Intent(ListaAlunosActivity.this, FormularioActivity.class);
@@ -80,6 +79,15 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
         registerForContextMenu(listaAlunos);
 
+        //Solicitando permissão de receber SMS.
+        if (ActivityCompat.checkSelfPermission(ListaAlunosActivity.this, Manifest.permission.RECEIVE_SMS)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            //RequestPermission é o pop-up que aparece para solicitar permissão
+            ActivityCompat.requestPermissions(ListaAlunosActivity.this,
+                    new String[]{Manifest.permission.RECEIVE_SMS},
+                    PadraoRequisicao.CODIGO_REQUISICAO_RECEBER_SMS);
+        }
 
     }
 

@@ -120,6 +120,34 @@ public class AlunoDAO extends SQLiteOpenHelper {
         close();
     }
 
+    public Aluno encontrarPorTelefone(String telefone) {
+
+        SQLiteDatabase writable = getWritableDatabase();
+
+        String sql = "SELECT * FROM " + TABELA +
+                " WHERE telefone = ? ";
+
+        Cursor cursor = writable.rawQuery(sql, new String[]{telefone});
+
+        Aluno aluno = null;
+
+        while (cursor.moveToNext()) {
+
+            aluno = new Aluno();
+            aluno.setId(  cursor.getLong(cursor.getColumnIndex("id")) );
+            aluno.setNome( cursor.getString(cursor.getColumnIndex("nome")) );
+            aluno.setEndereco( cursor.getString(cursor.getColumnIndex("endereco")) );
+            aluno.setTelefone( cursor.getString(cursor.getColumnIndex("telefone")) );
+            aluno.setSite( cursor.getString(cursor.getColumnIndex("site")));
+            aluno.setNota( cursor.getDouble(cursor.getColumnIndex("nota")));
+            aluno.setCaminhoFoto( cursor.getString(cursor.getColumnIndex("caminhoFoto")));
+
+        }
+        cursor.close();
+        close();
+        return aluno;
+    }
+
     @NonNull
     private ContentValues pegaDados(Aluno aluno) {
 
@@ -134,5 +162,6 @@ public class AlunoDAO extends SQLiteOpenHelper {
 
         return values;
     }
+
 
 }

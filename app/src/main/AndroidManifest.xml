@@ -4,6 +4,8 @@
 
     <!-- Solicitar ao usuário permissão para ligar -->
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!-- Solicitar permissão do usuário para ler os SMS -->
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -37,11 +40,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activities.FormularioActivity"
+
+        <activity android:name=".activities.FormularioActivity"
             android:label="@string/app_form_name" />
+
         <activity android:name=".activities.InformacoesActivity"
             android:label="Aluno" />
+
+        <!-- Somente declarar não é suficiente, é necessário
+         saber qual evento será tratado, pois há muitos como:
+         bateria baixa, mudança de conectividade (4g -> wi-fi) etc...-->
+        <receiver android:name=".receivers.SMSReceiver">
+            <intent-filter>
+                //Tratando somente os eventos de SMS recebido
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
