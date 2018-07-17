@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.alura.agenda.R;
+import br.com.alura.agenda.adapters.AlunosAdapter;
 import br.com.alura.agenda.dao.AlunoDAO;
 import br.com.alura.agenda.helpers.FormularioHelper;
 import br.com.alura.agenda.models.Aluno;
@@ -96,7 +97,10 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
         //android.R.layout.simple_list_item_1 - Significa o layout de um item da lista, como o textview que apareceu
 
-        ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunoDAO.getAlunos());
+        //Como era usando antes da modificação de layout da lista, ou melhor, de cada item dela
+        //ArrayAdapter<Aluno> adapter = new Arr*ayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunoDAO.getAlunos());
+
+        AlunosAdapter adapter = new AlunosAdapter(this, alunoDAO.getAlunos());
 
         //Adicionando o Adapter a ListView
         listaAlunos.setAdapter(adapter);
