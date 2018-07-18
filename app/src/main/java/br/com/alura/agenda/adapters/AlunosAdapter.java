@@ -37,16 +37,16 @@ public class AlunosAdapter extends BaseAdapter {
     //getItem e getItemId, são os mesmos relacionados abaixo com o onItemClick
     //recebidos como paramêtro.
 
-//    listaAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//        @Override
-//        public void onItemClick(AdapterView<?> lista, View item, int position, long id) {
-//
-//            Aluno aluno = (Aluno) lista.getItemAtPosition(position);
-//            Intent vaiParaFormulario = new Intent(ListaAlunosActivity.this, FormularioActivity.class);
-//            vaiParaFormulario.putExtra("aluno", aluno);
-//            startActivity(vaiParaFormulario);
-//        }
-//    });
+    //    listaAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    //        @Override
+    //        public void onItemClick(AdapterView<?> lista, View item, int position, long id) {
+    //
+    //            Aluno aluno = (Aluno) lista.getItemAtPosition(position);
+    //            Intent vaiParaFormulario = new Intent(ListaAlunosActivity.this, FormularioActivity.class);
+    //            vaiParaFormulario.putExtra("aluno", aluno);
+    //            startActivity(vaiParaFormulario);
+    //        }
+    //    });
 
     //Utilizado para compreender os clicks como getItemAtPosition, etc...
     @Override

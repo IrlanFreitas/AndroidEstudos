@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <!-- Solicitar permissão do usuário para ler os SMS -->
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <!-- Solicitando permissão de internet para enviar os dados para o servirdor -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"

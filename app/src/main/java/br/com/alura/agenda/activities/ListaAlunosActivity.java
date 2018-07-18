@@ -3,31 +3,29 @@ package br.com.alura.agenda.activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.PermissionInfo;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.Serializable;
-import java.security.Permission;
-import java.util.ArrayList;
 import java.util.List;
 
 import br.com.alura.agenda.R;
 import br.com.alura.agenda.adapters.AlunosAdapter;
+import br.com.alura.agenda.converters.AlunoConverter;
 import br.com.alura.agenda.dao.AlunoDAO;
-import br.com.alura.agenda.helpers.FormularioHelper;
 import br.com.alura.agenda.models.Aluno;
+import br.com.alura.agenda.service.EnviaAlunosTask;
+import br.com.alura.agenda.service.WebClient;
 import br.com.alura.agenda.util.PadraoRequisicao;
 
 public class ListaAlunosActivity extends AppCompatActivity {
@@ -35,14 +33,14 @@ public class ListaAlunosActivity extends AppCompatActivity {
     private AlunoDAO alunoDAO;
     private ListView listaAlunos;
 
-    //Método sobrescrito baseado no ciclo de vida da Atividade (Activity)
+    /*Método sobrescrito baseado no ciclo de vida da Atividade (Activity)*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        //Chamado caso tenha algum comportamento acontecendo anteiormente
+        /*Chamado caso tenha algum comportamento acontecendo anteiormente*/
         super.onCreate(savedInstanceState);
 
-        //Ligação da tela(xml) com o comportamento(activity)
+        /*Ligação da tela(xml) com o comportamento(activity)*/
         setContentView(R.layout.activity_lista_alunos);
 
         /* Modificação de TextView para ListView */
@@ -89,6 +87,16 @@ public class ListaAlunosActivity extends AppCompatActivity {
                     PadraoRequisicao.CODIGO_REQUISICAO_RECEBER_SMS);
         }
 
+        /* Solicitando permissão de acessar internet. - Não é necessário */
+        // if (ActivityCompat.checkSelfPermission(ListaAlunosActivity.this, Manifest.permission.INTERNET)
+        //         != PackageManager.PERMISSION_GRANTED) {
+        //
+        //     //RequestPermission é o pop-up que aparece para solicitar permissão
+        //     ActivityCompat.requestPermissions(ListaAlunosActivity.this,
+        //             new String[]{Manifest.permission.INTERNET},
+        //             PadraoRequisicao.CODIGO_REQUISICAO_INTENET);
+        // }
+
     }
 
     @Override
@@ -98,10 +106,11 @@ public class ListaAlunosActivity extends AppCompatActivity {
     }
 
     private void carregarLista() {
-        /*Sobre o ArrayAdapter
-         * necessário passar no construtor, o contexto - que é a atual Activity
-         * depois o layout da lista, e como não temos passarei um layout pronto do próprio android
-         * e depois a fonte de dados */
+
+        /*Sobre o ArrayAdapter */
+        //necessário passar no construtor, o contexto - que é a atual Activity
+        //depois o layout da lista, e como não temos passarei um layout pronto do próprio android
+        //e depois a fonte de dados
 
         //android.R.layout.simple_list_item_1 - Significa o layout de um item da lista, como o textview que apareceu
 
@@ -114,12 +123,13 @@ public class ListaAlunosActivity extends AppCompatActivity {
         listaAlunos.setAdapter(adapter);
     }
 
-    /* Depois de registrado para o menu de contexto para a determinada view pela forma:
+    /* Personalização do Menu de Contexto */
+    //Depois de registrado para o menu de contexto para a determinada view pela forma:
+    //
+    //registerForContextMenu(listaAlunos);
+    //
+    //As ações do menu de contexto são personalizadas, por esse método.
 
-        registerForContextMenu(listaAlunos);
-
-        As ações do menu de contexto são personalizadas, por esse método.
-    * */
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
 
@@ -217,9 +227,11 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
     }
 
+    /* Controlar a ação depois de consedida ou não uma permissão */
     //Quando solicita permissão de algo que quer fazer algo logo depois,
     //indicando o código de requisição é possível logo após receber a permissão
     //realizar algum comportamento
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -230,6 +242,41 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        /* Menu Inflater */
+        // Inflar, juntar o xml já criado com o código java
+        // sem precisar criar os elementos na mão
+        getMenuInflater().inflate(R.menu.menu_lista_alunos, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    /* Configurando cada botão */
+    //Para isso é importante dar os devidos ids para os itens do menu
+    //e com isso controlar a ação de cada um dos botões pelo id.
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.menu_lista_alunos_enviar_notas:
+
+                /* Executando o método - doInBackground */
+                new EnviaAlunosTask(this).execute();
+
+                break;
+
+            case R.id.menu_lista_alunos_baixar_notas:
+
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     //Caso tivesse inflado o xml, por aqui poderia achar o elemento

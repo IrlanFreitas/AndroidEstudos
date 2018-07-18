@@ -87,6 +87,7 @@ public class FormularioActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_formulario, menu);
 
+        //Verificar o que a indicação do retorno faz;
         return super.onCreateOptionsMenu(menu);
     }
 
