@@ -17,15 +17,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.List;
-
 import br.com.alura.agenda.R;
 import br.com.alura.agenda.adapters.AlunosAdapter;
-import br.com.alura.agenda.converters.AlunoConverter;
 import br.com.alura.agenda.dao.AlunoDAO;
 import br.com.alura.agenda.models.Aluno;
-import br.com.alura.agenda.service.EnviaAlunosTask;
-import br.com.alura.agenda.service.WebClient;
+import br.com.alura.agenda.tasks.EnviaAlunosTask;
 import br.com.alura.agenda.util.PadraoRequisicao;
 
 public class ListaAlunosActivity extends AppCompatActivity {

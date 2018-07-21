@@ -1,8 +1,12 @@
 package br.com.alura.agenda.adapters;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.GradientDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +71,7 @@ public class AlunosAdapter extends BaseAdapter {
 
         Aluno aluno = alunos.get(position);
 
-        /*LayoutInflate*/
+        /*LayoutInflater*/
         //Inflate - Ligando um xml criado para layout e o código
         //sem a necessidade de criar todos os elementos na mão
         LayoutInflater inflater = LayoutInflater.from(contexto);
@@ -87,6 +91,12 @@ public class AlunosAdapter extends BaseAdapter {
         //o dispositivo do usuário.
         View view = convertView;
         if (convertView == null) {
+
+            /* Qual o tipo de layout apropriado  */
+            //Não há necessidade de mudança de código o próprio
+            //SO vai saber o melhor momento de aplicar cada layout
+            //pois, estão em pastas diferentes um é somente layout
+            //e o outros é layout-land, porem com o mesmo nome de arquivo, list_item
             view = inflater.inflate(R.layout.list_item, parent, false);
         }
 
@@ -94,6 +104,8 @@ public class AlunosAdapter extends BaseAdapter {
         TextView campoNome = view.findViewById(R.id.list_item_nome);
         TextView campoTelefone = view.findViewById(R.id.list_item_telefone);
         ImageView imagemAluno = view.findViewById(R.id.list_item_imagem);
+        TextView campoEndereco = view.findViewById(R.id.list_item_endereco );
+        TextView campoSite = view.findViewById(R.id.list_item_site );
 
         campoNome.setText(aluno.getNome());
         campoTelefone.setText(aluno.getTelefone());
@@ -101,6 +113,29 @@ public class AlunosAdapter extends BaseAdapter {
             imagemAluno.setImageBitmap(carregarImagem(aluno.getCaminhoFoto()));
             imagemAluno.setScaleType(ImageView.ScaleType.FIT_XY);
         }
+
+        /*Entendendo qual a orientação e aplicando a modificação*/
+        /* Esse jeito que fiz não funcionou :( */
+        //if (contexto.getResources().getConfiguration().orientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE ) {
+        //    TextView campoEndereco = view.findViewById(R.id.list_item_endereco );
+        //    TextView campoSite = view.findViewById(R.id.list_item_site );
+        //    campoEndereco.setText(aluno.getEndereco());
+        //    campoSite.setText(aluno.getSite());
+        //}
+
+        /* Orientação Portrait */
+        //Caso ele esteja na orientação portrait
+        //Os objetos que represetam os elementos
+        //da tela estarão nulo, e por isso deve
+        //verificar antes
+        if (campoEndereco != null) {
+            campoEndereco.setText(aluno.getEndereco());
+        }
+        if (campoSite != null) {
+            campoSite.setText(aluno.getSite());
+        }
+
+        Log.i("Orientação", String.valueOf(contexto.getResources().getConfiguration().orientation) );
 
         return view;
     }
