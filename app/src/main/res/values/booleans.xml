@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Usando uma variável de controle junto com
+    o application resources do modo
+    paisagem ou portrait -->
+
+<resources>
+    <bool name="modoPaisagem">false</bool>
+</resources>

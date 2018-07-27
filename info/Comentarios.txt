@@ -119,4 +119,14 @@ Acontecerá um erro na hora em que for tirar a foto, segue o link de ajuda : {
 }
 
 
-                   
+Application Resources - 
+
+Fragment - Junção de comportamento e layout de uma activity reutilizavél, pedaço de tela. {
+
+	import android.app.Fragment; - Api 23 pra cima.
+	import android.support.v4.app.Fragment; - Versões anteriores.
+}
+
+Tag include - Possível de fazer uso de um layout já criado e utilizado em outra activity
+
+FrameLayout - Layout utilizado para injetar fragments em layouts de activities

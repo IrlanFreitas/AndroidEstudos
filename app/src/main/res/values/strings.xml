@@ -6,4 +6,8 @@
     <string name="formulario_endereco">Endereco</string>
     <string name="formulario_telefone">Telefone</string>
     <string name="formulario_site">Site</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

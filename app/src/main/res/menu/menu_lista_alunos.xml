@@ -7,9 +7,14 @@
         android:icon="@drawable/ic_enviar"
         app:showAsAction="always" />
 
-    <item android:id="@+id/menu_lista_alunos_baixar_notas"
+    <item android:id="@+id/menu_lista_alunos_baixar_provas"
         android:title="Baixar"
-        android:icon="@drawable/ic_receber"
+        android:icon="@drawable/shopping_list_3"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/menu_lista_alunos_visualizar_mapa"
+        android:title="Baixar"
+        android:icon="@drawable/ic_mapa"
         app:showAsAction="always" />
 
 </menu>

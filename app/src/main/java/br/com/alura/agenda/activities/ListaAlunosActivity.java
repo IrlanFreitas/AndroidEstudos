@@ -267,7 +267,20 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
                 break;
 
-            case R.id.menu_lista_alunos_baixar_notas:
+            case R.id.menu_lista_alunos_baixar_provas:
+
+                /*Intent irParaProvas = new Intent(this, ProvasActivity.class);
+                startActivity(irParaProvas);*/
+
+                Intent irParaProvas = new Intent(this, ProvasActivity.class);
+                startActivity(irParaProvas);
+
+                break;
+
+            case R.id.menu_lista_alunos_visualizar_mapa:
+
+                Intent irParaMapa = new Intent(this, MapsActivity.class);
+                startActivity(irParaMapa);
 
                 break;
         }
