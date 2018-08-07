@@ -9,6 +9,7 @@ import android.widget.RatingBar;
 import br.com.alura.agenda.R;
 import br.com.alura.agenda.activities.FormularioActivity;
 import br.com.alura.agenda.models.Aluno;
+import br.com.alura.agenda.util.CarregadorDeFoto;
 
 public class FormularioHelper {
 
@@ -59,27 +60,38 @@ public class FormularioHelper {
 
     }
 
-    public void carregarImagem(String caminhoFoto) {
+    public Bitmap carregarImagem(String caminhoFoto) {
 
         if (caminhoFoto != null) {
             //Criando um bitmap a partir do arquivo.
             Bitmap bitmap = BitmapFactory.decodeFile(caminhoFoto);
 
+            //Bitmap bitmap = CarregadorDeFoto.carrega(caminhoFoto);
+
             //Diminuindo a qualidade da imagem por limitações de software
             Bitmap bitmapReduzido = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
 
-            //Mais fácil de mexer com imagens
-            imagemAluno.setImageBitmap(bitmapReduzido);
+            inserirImagem(caminhoFoto, bitmapReduzido);
 
-            //Encaixando a imagem na altura e largura disponível no imagem view.
-            imagemAluno.setScaleType(ImageView.ScaleType.FIT_XY);
 
-            //o ImageView não salva o caminho da foto,
-            //somente o bitmap, porém, há um método
-            //que pode ser utilizado como auxiliar
-            //o setTag, que funciona como o PutExtra
-            //para anexar informações ao objeto
-            imagemAluno.setTag(caminhoFoto);
+            return bitmapReduzido;
         }
+
+        return null;
+    }
+
+    public void inserirImagem(String caminhoFoto, Bitmap bitmapReduzido) {
+        //Mais fácil de mexer com imagens
+        imagemAluno.setImageBitmap(bitmapReduzido);
+
+        //Encaixando a imagem na altura e largura disponível no imagem view.
+        imagemAluno.setScaleType(ImageView.ScaleType.FIT_XY);
+
+        //o ImageView não salva o caminho da foto,
+        //somente o bitmap, porém, há um método
+        //que pode ser utilizado como auxiliar
+        //o setTag, que funciona como o PutExtra
+        //para anexar informações ao objeto
+        imagemAluno.setTag(caminhoFoto);
     }
 }

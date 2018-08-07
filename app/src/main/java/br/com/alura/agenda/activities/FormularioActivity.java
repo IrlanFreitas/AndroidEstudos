@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,8 @@ public class FormularioActivity extends AppCompatActivity {
     private AlunoDAO alunoDAO;
 
     private String caminhoFoto;
+
+    private Bitmap imagemAluno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +79,8 @@ public class FormularioActivity extends AppCompatActivity {
         //  @Override
         //   public void onClick(View view) { }
         //});
+
+
 
     }
 
@@ -137,8 +142,24 @@ public class FormularioActivity extends AppCompatActivity {
             if (requestCode == PadraoRequisicao.CODIGO_REQUISICAO_CAMERA ) {
 
                 //Delegado ao helper
-                helper.carregarImagem(caminhoFoto);
+                imagemAluno = helper.carregarImagem(caminhoFoto);
             }
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        outState.putParcelable("imagemAluno", imagemAluno);
+        outState.putString("caminhofoto", caminhoFoto);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        caminhoFoto = savedInstanceState.getString("caminhofoto");
+        imagemAluno = savedInstanceState.getParcelable("imagemAluno");
+        helper.inserirImagem(caminhoFoto, imagemAluno);
     }
 }

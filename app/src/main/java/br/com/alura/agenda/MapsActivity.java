@@ -1,4 +1,4 @@
-package br.com.alura.agenda.activities;
+package br.com.alura.agenda;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -10,8 +10,17 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import br.com.alura.agenda.R;
 
+/* Comportamento inusitado */
+// Se eu criar essa classe no package, activities
+// a chave da API não funciona
+// pelo que parece, essa classe só pode
+// estar no pacote raiz.
+
+/* Utilizada somente como Exemplo
+ * Outra activity como função de mapa será criada */
+
+@Deprecated
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -36,6 +45,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;

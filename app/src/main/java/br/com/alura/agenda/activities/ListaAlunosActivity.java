@@ -1,11 +1,13 @@
 package br.com.alura.agenda.activities;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -17,6 +19,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import br.com.alura.agenda.MapsActivity;
 import br.com.alura.agenda.R;
 import br.com.alura.agenda.adapters.AlunosAdapter;
 import br.com.alura.agenda.dao.AlunoDAO;
@@ -213,9 +216,21 @@ public class ListaAlunosActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
 
-                alunoDAO.deletar(aluno.getId());
-                carregarLista();
-                Toast.makeText(ListaAlunosActivity.this, "Aluno " + aluno.getNome() + " foi deletado com sucesso!", Toast.LENGTH_SHORT).show();
+                new AlertDialog.Builder(ListaAlunosActivity.this)
+                        .setTitle("Deletando aluno")
+                        .setMessage("Tem certeza que deseja deletar o contato do aluno? ")
+                        .setNegativeButton("Não", null)
+                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                alunoDAO.deletar(aluno.getId());
+                                carregarLista();
+                                Toast.makeText(ListaAlunosActivity.this, "Aluno " + aluno.getNome() + " foi deletado com sucesso!", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }).show();
+
                 return false;
             }
         });
@@ -279,7 +294,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
             case R.id.menu_lista_alunos_visualizar_mapa:
 
-                Intent irParaMapa = new Intent(this, MapsActivity.class);
+                Intent irParaMapa = new Intent(this, MapaActivity.class);
                 startActivity(irParaMapa);
 
                 break;
