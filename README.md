@@ -1,16 +1,17 @@
 # AndroidEstudos
 
-Depois de finalizar os cursos b·sicos de Android, resolvi implementar algumas melhorias.
+Depois de finalizar os cursos b√°sicos de Android, resolvi implementar algumas melhorias.
 
 Agenda de Alunos:
 
  - [x] Adicionar as pendencias do README.md 
  - [ ] Colocar Icones legais no App Noun Project
- - [ ] TraÁar uma linha de onde estou para os alunos proximos 
- - [ ] Corrigir a orientaÁ„o das fotos 
- - [ ] Recuperar a foto quando mudar a orientaÁ„o 
- - [x] Criar caixas de di·logo para os deletes(AÁıes Importantes) 
- - [ ] CRUD provas, tÛpicos.
+ - [ ] Tra√ßar uma linha de onde estou para os alunos proximos 
+ - [ ] Corrigir a orienta√ß√£o das fotos 
+ - [ ] Recuperar a foto quando mudar a orienta√ß√£o 
+ - [x] Criar caixas de di√°logo para os deletes(A√ß√µes Importantes) 
+ - [ ] CRUD provas 
+ - [ ] CRUD t√≥picos
  
  
 
