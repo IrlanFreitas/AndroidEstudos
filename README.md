@@ -12,6 +12,7 @@ Agenda de Alunos:
  - [x] Criar caixas de diálogo para os deletes(Ações Importantes) 
  - [ ] CRUD provas 
  - [ ] CRUD tópicos
+ - [ ] Adicionar Splash Screen
  
  
 
