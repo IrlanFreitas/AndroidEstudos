@@ -8,7 +8,7 @@ Agenda de Alunos:
  - [ ] Colocar Icones legais no App Noun Project
  - [ ] Traçar uma linha de onde estou para os alunos proximos 
  - [ ] Corrigir a orientação das fotos 
- - [ ] Recuperar a foto quando mudar a orientação 
+ - [ ] Não perder nenhum dado do formulário de adição de alunos e provas
  - [x] Criar caixas de diálogo para os deletes(Ações Importantes) 
  - [ ] CRUD provas 
  - [ ] CRUD tópicos
