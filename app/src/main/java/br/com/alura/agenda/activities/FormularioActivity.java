@@ -26,6 +26,7 @@ import br.com.alura.agenda.R;
 import br.com.alura.agenda.dao.AlunoDAO;
 import br.com.alura.agenda.helpers.FormularioHelper;
 import br.com.alura.agenda.models.Aluno;
+import br.com.alura.agenda.tasks.InsereAlunoTask;
 import br.com.alura.agenda.util.PadraoRequisicao;
 
 public class FormularioActivity extends AppCompatActivity {
@@ -114,6 +115,8 @@ public class FormularioActivity extends AppCompatActivity {
                     alunoDAO.atualizar(aluno);
                     acao = " Atualizado com sucesso. ";
                 }
+
+                new InsereAlunoTask(this, aluno).execute();
 
                 //Mensagem que aparece abaixo como uma notificação
                 //FormularioActivity.this = view.getContext()

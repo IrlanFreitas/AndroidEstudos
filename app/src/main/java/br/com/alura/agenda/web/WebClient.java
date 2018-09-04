@@ -1,5 +1,7 @@
 package br.com.alura.agenda.web;
 
+import android.support.annotation.Nullable;
+
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.HttpURLConnection;
@@ -10,10 +12,29 @@ import java.util.Scanner;
 public class WebClient {
 
     public String post(String json) {
+
+        String endereco = "https://www.caelum.com.br/mobile";
+
+        return realizaConexao(json, endereco);
+
+    }
+
+    public void insere(String jsonAluno) {
+        /*Endereço que o servidor está preparado para receber o aluno
+        * porem, não se pode usar localhost, pois aí é o contexto do
+        * celular, o correto é usar o ip*/
+        String endereco = "http://192.168.56.1:8080/api/aluno";
+
+        realizaConexao(jsonAluno, endereco);
+
+    }
+
+    @Nullable
+    private String realizaConexao(String json, String endereco) {
         try {
 
             /* Endereço do Servidor */
-            URL url = new URL("https://www.caelum.com.br/mobile");
+            URL url = new URL(endereco);
 
             /* Abrindo a conexão com o servidor*/
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -50,7 +71,6 @@ public class WebClient {
 
         /* Caso dê errado */
         return null;
-
     }
 
 }

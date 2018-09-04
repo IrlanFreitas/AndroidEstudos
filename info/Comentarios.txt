@@ -130,3 +130,8 @@ Fragment - Junção de comportamento e layout de uma activity reutilizavél, ped
 Tag include - Possível de fazer uso de um layout já criado e utilizado em outra activity
 
 FrameLayout - Layout utilizado para injetar fragments em layouts de activities
+
+
+
+Link para melhorar a forma como mexer com os mapas: https://www.thiengo.com.br/utilizando-intencoes-para-mapas-de-alta-qualidade-no-android
+

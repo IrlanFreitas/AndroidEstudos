@@ -47,4 +47,31 @@ public class AlunoConverter {
 
         return js.toString();
     }
+
+    public String converteParaJSON(Aluno aluno) {
+
+        /* Classe que ajuda a criar o JSON de envio */
+        // Inicialmente acho o trabalho muito massante
+        JSONStringer js = new JSONStringer();
+
+        try {
+
+            js.object()
+                    .key("id").value(aluno.getId())
+                    .key("nome").value(aluno.getNome())
+                    .key("endereco").value(aluno.getEndereco())
+                    .key("telefone").value(aluno.getTelefone())
+                    .key("site").value(aluno.getSite())
+                    .key("nota").value(aluno.getNota())
+                    .endObject();
+
+        } catch (JSONException e1) {
+            e1.printStackTrace();
+        }
+
+
+        Log.i("Conversão", js.toString());
+
+        return js.toString();
+    }
 }

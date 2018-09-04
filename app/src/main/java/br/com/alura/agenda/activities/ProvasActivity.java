@@ -8,11 +8,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import br.com.alura.agenda.R;
 import br.com.alura.agenda.fragments.DetalheProvaFragment;
+import br.com.alura.agenda.fragments.InserirProvaFragment;
 import br.com.alura.agenda.fragments.ListaProvasFragment;
 import br.com.alura.agenda.models.Prova;
 
@@ -23,9 +25,12 @@ public class ProvasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_provas);
+
+        Button btnAdicionar = findViewById(R.id.fragment_lista_provas_btn_adicionar);
+
         /* O código abaixo indica utilização de fragment */
         /* Manipulador de Fragments */
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        final FragmentManager fragmentManager = getSupportFragmentManager();
 
         /* Necessário gerenciar transações para manipular o fragment */
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -53,8 +58,24 @@ public class ProvasActivity extends AppCompatActivity {
             transaction.replace(R.id.provas_frame_detalhe, new DetalheProvaFragment());
         }
 
+        btnAdicionar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                fragmentTransaction.replace(R.id.provas_frame_principal, new InserirProvaFragment());
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
         /* Necessário commit para funcione */
         transaction.commit();
+
+
+
+
     }
 
     private boolean estaNoModoPaisagem() {

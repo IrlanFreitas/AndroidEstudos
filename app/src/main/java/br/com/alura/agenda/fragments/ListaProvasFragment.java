@@ -14,12 +14,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import br.com.alura.agenda.R;
 import br.com.alura.agenda.activities.DetalhesProvaActivity;
 import br.com.alura.agenda.activities.ProvasActivity;
+import br.com.alura.agenda.adapters.ProvasAdapter;
 import br.com.alura.agenda.models.Prova;
 
 public class ListaProvasFragment extends Fragment {
@@ -42,16 +44,16 @@ public class ListaProvasFragment extends Fragment {
         //false - para não ocorrer erro.
         View view = inflater.inflate(R.layout.fragment_lista_provas, container, false);
 
-        Prova portugues = new Prova("Portugues", "24/08/2018", Arrays.asList("Analise Sintática", "Analise Morfológica"));
+        /*Prova portugues = new Prova("Portugues", "24/08/2018", Arrays.asList("Analise Sintática", "Analise Morfológica"));
         Prova matematica = new Prova("Matematica", "26/08/2018", Arrays.asList("Logaritmo", "Seno", "Cosseno"));
         Prova historia = new Prova("Historia", "28/08/2018", Arrays.asList("Segunda Guerra Mundial", "Guerra Fria", "Colonizações"));
-        Prova geografia = new Prova("Geografia", "30/08/2018", Arrays.asList("Morros", "Planices", "Terrenos"));
+        Prova geografia = new Prova("Geografia", "30/08/2018", Arrays.asList("Morros", "Planices", "Terrenos"));*/
 
-        List<Prova> provas = Arrays.asList(portugues, matematica, historia, geografia);
+        List<Prova> provas = new ArrayList<>(); //Arrays.asList(portugues, matematica, historia, geografia);
 
         ListView listaProvas = view.findViewById(R.id.provas_lista);
 
-        ArrayAdapter<Prova> adapter = new ArrayAdapter( getContext(), android.R.layout.simple_list_item_1, provas);
+        ProvasAdapter adapter = new ProvasAdapter(getContext(), provas);
 
         listaProvas.setAdapter(adapter);
 
@@ -64,6 +66,7 @@ public class ListaProvasFragment extends Fragment {
                  * de um framelayout para o fragment
                  * porem, nesse caso a responsabilidade
                  * fica com a activity e não com o desenvolvedor */
+
                 ProvasActivity activity = (ProvasActivity) getActivity();
                 activity.selecionaProva(prova);
 

@@ -8,9 +8,9 @@ public class Prova implements Serializable {
     private Long id;
     private String materia;
     private String data;
-    private List<String> topicos;
+    private List<Topico> topicos;
 
-    public Prova(String materia, String data, List<String> topicos) {
+    public Prova(String materia, String data, List<Topico> topicos) {
         this.materia = materia;
         this.data = data;
         this.topicos = topicos;
@@ -40,11 +40,11 @@ public class Prova implements Serializable {
         this.data = data;
     }
 
-    public List<String> getTopicos() {
+    public List<Topico> getTopicos() {
         return topicos;
     }
 
-    public void setTopicos(List<String> topicos) {
+    public void setTopicos(List<Topico> topicos) {
         this.topicos = topicos;
     }
 
