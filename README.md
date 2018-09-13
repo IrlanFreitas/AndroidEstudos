@@ -1,8 +1,19 @@
-# AndroidEstudos
+# Carreira Desenvolvedor Android
 
-Depois de finalizar os cursos básicos de Android, resolvi implementar algumas melhorias.
 
-Agenda de Alunos:
+- [x] **Android I: Crie sua App fantástica com Android Studio**
+- [x] **Android II: Integração com apps e recursos do device**
+- [x] **Android III: Aprimore sua app com Fragments, Google Maps e GPS**
+- [ ] **Android com Web Service parte 1: Sincronize sua app com o servidor**
+- [ ]  **Android com Web Service parte 2: mais técnicas de sincronização**
+- [ ]  **Android com Web Service parte 3: Sincronização em modo offline**
+
+___
+
+
+Depois de finalizar os cursos básicos de Android, foi percebido que é necessário algumas melhorias.
+
+Melhorias:
 
  - [x] Adicionar as pendencias do README.md 
  - [ ] Colocar Icones legais no App Noun Project
@@ -14,6 +25,5 @@ Agenda de Alunos:
  - [ ] CRUD tópicos
  - [ ] Adicionar Splash Screen
  
- 
 
-Usei o [stackedit](https://stackedit.io/app#) como ferramenta, editor online, otimo.
+> Written with [StackEdit](https://stackedit.io/).
