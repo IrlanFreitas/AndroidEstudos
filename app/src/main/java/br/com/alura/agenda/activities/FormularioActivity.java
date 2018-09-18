@@ -26,8 +26,13 @@ import br.com.alura.agenda.R;
 import br.com.alura.agenda.dao.AlunoDAO;
 import br.com.alura.agenda.helpers.FormularioHelper;
 import br.com.alura.agenda.models.Aluno;
+import br.com.alura.agenda.retrofit.RetrofitInicializador;
+import br.com.alura.agenda.service.AlunoService;
 import br.com.alura.agenda.tasks.InsereAlunoTask;
 import br.com.alura.agenda.util.PadraoRequisicao;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FormularioActivity extends AppCompatActivity {
 
@@ -116,11 +121,32 @@ public class FormularioActivity extends AppCompatActivity {
                     acao = " Atualizado com sucesso. ";
                 }
 
-                new InsereAlunoTask(this, aluno).execute();
+                //new InsereAlunoTask(this, aluno).execute();
 
-                //Mensagem que aparece abaixo como uma notificação
-                //FormularioActivity.this = view.getContext()
-                Toast.makeText(FormularioActivity.this, acao, Toast.LENGTH_SHORT).show();
+                AlunoService alunoService = new RetrofitInicializador().getAlunoService();
+
+                Call<Void> call = alunoService.insere(aluno);
+
+                /* Fazendo a chamada ao servidor */
+                // execute(): Realiza requisição síncroniza, ou seja, prende a thread principal.
+                // enqueue(): Realiza requisição assíncrona, ou seja, cria uma thread separada da thread principal e executa em background.
+                call.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        //Mensagem que aparece abaixo como uma notificação
+                        //FormularioActivity.this = view.getContext()
+                        Toast.makeText(FormularioActivity.this, "Ação realizada com sucesso!", Toast.LENGTH_SHORT).show();
+                        Log.i("onResponse", "requisicao com sucesso");
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Log.e("onFailure", "requisicao falhou");
+                    }
+                });
+
+
+
 
                 //Finalizando a activity com o conceito de pilha do Android
                 finish();

@@ -8,6 +8,7 @@ import br.com.alura.agenda.converters.AlunoConverter;
 import br.com.alura.agenda.models.Aluno;
 import br.com.alura.agenda.web.WebClient;
 
+@Deprecated
 public class InsereAlunoTask extends AsyncTask <Void, Void, Void> {
 
     private Context contexto;
