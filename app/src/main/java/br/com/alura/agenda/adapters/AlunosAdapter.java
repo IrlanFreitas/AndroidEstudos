@@ -61,7 +61,8 @@ public class AlunosAdapter extends BaseAdapter {
     //Utilizado para compreender os clicks como getItemAtPosition, etc...
     @Override
     public long getItemId(int position) {
-        return alunos.get(position).getId();
+        // Resolvendo de uma forma que não irá afetar o desenvolvimento da aplicação
+        return 0;
     }
 
     //Método mais importante

@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +19,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.List;
 
 import br.com.alura.agenda.MapsActivity;
 import br.com.alura.agenda.R;
@@ -116,7 +119,13 @@ public class ListaAlunosActivity extends AppCompatActivity {
         //Como era usando antes da modificação de layout da lista, ou melhor, de cada item dela
         //ArrayAdapter<Aluno> adapter = new Arr*ayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunoDAO.getAlunos());
 
-        AlunosAdapter adapter = new AlunosAdapter(this, alunoDAO.getAlunos());
+        List<Aluno> alunos = alunoDAO.getAlunos();
+
+        AlunosAdapter adapter = new AlunosAdapter(this, alunos);
+
+        for(Aluno aluno: alunos) {
+            Log.i("Alunos Id", "carregarLista - nome: "+ aluno.getNome() + " -  id:" + aluno.getId());
+        }
 
         //Adicionando o Adapter a ListView
         listaAlunos.setAdapter(adapter);
