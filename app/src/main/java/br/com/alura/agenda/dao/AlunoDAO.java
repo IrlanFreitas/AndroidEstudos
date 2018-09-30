@@ -15,7 +15,7 @@ import br.com.alura.agenda.models.Aluno;
 
 public class AlunoDAO extends SQLiteOpenHelper {
 
-    private static final String TABELA = "ALUNOS";
+    private static final String TABELA = "Alunos";
 
     public AlunoDAO(Context context) {
         //Agenda - Nome do banco, não tabela.
@@ -120,9 +120,11 @@ public class AlunoDAO extends SQLiteOpenHelper {
 
         SQLiteDatabase writable = getWritableDatabase();
 
+        aluno.setId(geraUUID());
+
         ContentValues values = pegaDados(aluno);
 
-        long idGerado = writable.insert("Alunos", null, values);
+        writable.insert("Alunos", null, values);
 
         // Controlando a geração de id's pelo SQLite
         //aluno.setId(idGerado);
@@ -166,7 +168,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
     public void deletar(String alunoId) {
         SQLiteDatabase writable = getWritableDatabase();
 
-        writable.delete("Alunos", "id = ?", new String[]{alunoId.toString()});
+        writable.delete("Alunos", "id = ?", new String[]{alunoId});
         close();
     }
 
@@ -175,7 +177,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
 
         ContentValues values = pegaDados(aluno);
 
-        writable.update(TABELA, values, "id = ?", new String[]{aluno.getId().toString()});
+        writable.update(TABELA, values, "id = ?", new String[]{aluno.getId()});
         close();
     }
 
@@ -212,6 +214,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
 
+        values.put("id", aluno.getId());
         values.put("nome", aluno.getNome());
         values.put("telefone", aluno.getTelefone());
         values.put("endereco", aluno.getEndereco());

@@ -29,7 +29,7 @@ public class InformacoesHelper {
     }
 
     public void preencherFormulario(Aluno aluno){
-        campoId.setText(aluno.getId().toString());
+        campoId.setText(aluno.getId());
         campoNome.setText(aluno.getNome());
         campoEndereco.setText(aluno.getEndereco());
         campoTelefone.setText(aluno.getTelefone());
