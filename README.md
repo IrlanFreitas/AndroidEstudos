@@ -24,6 +24,8 @@ Melhorias:
  - [ ] CRUD provas 
  - [ ] CRUD tópicos
  - [ ] Adicionar Splash Screen
+ - [ ] [Deploy jar do servidor no Heroku](https://dzone.com/articles/spring-boot-heroku-and-cicd)
+ - [ ] Verificar se tem atualizações com botão ou puxando para baixo
  
 
 > Written with [StackEdit](https://stackedit.io/).
