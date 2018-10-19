@@ -22,13 +22,17 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import br.com.alura.agenda.MapsActivity;
 import br.com.alura.agenda.R;
 import br.com.alura.agenda.adapters.AlunosAdapter;
 import br.com.alura.agenda.dao.AlunoDAO;
+import br.com.alura.agenda.dto.AlunoSync;
 import br.com.alura.agenda.models.Aluno;
+import br.com.alura.agenda.retrofit.RetrofitInicializador;
 import br.com.alura.agenda.tasks.EnviaAlunosTask;
 import br.com.alura.agenda.util.PadraoRequisicao;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ListaAlunosActivity extends AppCompatActivity {
 
@@ -104,6 +108,27 @@ public class ListaAlunosActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        Call<AlunoSync> callAlunos = new RetrofitInicializador().getAlunoService().getAlunos();
+
+        callAlunos.enqueue(new Callback<AlunoSync>() {
+            @Override
+            public void onResponse(Call<AlunoSync> call, Response<AlunoSync> response) {
+                AlunoDAO dao = new AlunoDAO(ListaAlunosActivity.this);
+
+                AlunoSync aluno = response.body();
+
+                dao.sincronizar(aluno.getAlunos());
+
+                carregarLista();
+            }
+
+            @Override
+            public void onFailure(Call<AlunoSync> call, Throwable t) {
+
+            }
+        });
+
         carregarLista();
     }
 

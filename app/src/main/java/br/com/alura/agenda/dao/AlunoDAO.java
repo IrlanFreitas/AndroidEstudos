@@ -94,7 +94,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
 
                 //Inserindo o UUID logo depois do modelo estar atualizado
 
-                String obterAlunos  = " SELECT * FROM Alunos ";
+                String obterAlunos = " SELECT * FROM Alunos ";
 
                 Cursor cursor = sqLiteDatabase.rawQuery(obterAlunos, null);
 
@@ -102,8 +102,8 @@ public class AlunoDAO extends SQLiteOpenHelper {
 
                 String atualizacaoIdsAlunos = " UPDATE Alunos SET id = ? WHERE id = ? ";
 
-                for (Aluno aluno: alunos) {
-                    sqLiteDatabase.execSQL(atualizacaoIdsAlunos, new String[]{ geraUUID() , aluno.getId()});
+                for (Aluno aluno : alunos) {
+                    sqLiteDatabase.execSQL(atualizacaoIdsAlunos, new String[]{geraUUID(), aluno.getId()});
                 }
 
 
@@ -116,11 +116,13 @@ public class AlunoDAO extends SQLiteOpenHelper {
         return UUID.randomUUID().toString();
     }
 
-    public void inserir(Aluno aluno){
+    public void inserir(Aluno aluno) {
 
         SQLiteDatabase writable = getWritableDatabase();
 
-        aluno.setId(geraUUID());
+        if (aluno.getId() == null || aluno.getId().trim().isEmpty()) {
+            aluno.setId(geraUUID());
+        }
 
         ContentValues values = pegaDados(aluno);
 
@@ -149,13 +151,13 @@ public class AlunoDAO extends SQLiteOpenHelper {
         while (cursor.moveToNext()) {
 
             Aluno aluno = new Aluno();
-            aluno.setId(  cursor.getString(cursor.getColumnIndex("id")) );
-            aluno.setNome( cursor.getString(cursor.getColumnIndex("nome")) );
-            aluno.setEndereco( cursor.getString(cursor.getColumnIndex("endereco")) );
-            aluno.setTelefone( cursor.getString(cursor.getColumnIndex("telefone")) );
-            aluno.setSite( cursor.getString(cursor.getColumnIndex("site")));
-            aluno.setNota( cursor.getDouble(cursor.getColumnIndex("nota")));
-            aluno.setCaminhoFoto( cursor.getString(cursor.getColumnIndex("caminhoFoto")));
+            aluno.setId(cursor.getString(cursor.getColumnIndex("id")));
+            aluno.setNome(cursor.getString(cursor.getColumnIndex("nome")));
+            aluno.setEndereco(cursor.getString(cursor.getColumnIndex("endereco")));
+            aluno.setTelefone(cursor.getString(cursor.getColumnIndex("telefone")));
+            aluno.setSite(cursor.getString(cursor.getColumnIndex("site")));
+            aluno.setNota(cursor.getDouble(cursor.getColumnIndex("nota")));
+            aluno.setCaminhoFoto(cursor.getString(cursor.getColumnIndex("caminhoFoto")));
 
             alunos.add(aluno);
         }
@@ -195,13 +197,13 @@ public class AlunoDAO extends SQLiteOpenHelper {
         while (cursor.moveToNext()) {
 
             aluno = new Aluno();
-            aluno.setId(  cursor.getString(cursor.getColumnIndex("id")) );
-            aluno.setNome( cursor.getString(cursor.getColumnIndex("nome")) );
-            aluno.setEndereco( cursor.getString(cursor.getColumnIndex("endereco")) );
-            aluno.setTelefone( cursor.getString(cursor.getColumnIndex("telefone")) );
-            aluno.setSite( cursor.getString(cursor.getColumnIndex("site")));
-            aluno.setNota( cursor.getDouble(cursor.getColumnIndex("nota")));
-            aluno.setCaminhoFoto( cursor.getString(cursor.getColumnIndex("caminhoFoto")));
+            aluno.setId(cursor.getString(cursor.getColumnIndex("id")));
+            aluno.setNome(cursor.getString(cursor.getColumnIndex("nome")));
+            aluno.setEndereco(cursor.getString(cursor.getColumnIndex("endereco")));
+            aluno.setTelefone(cursor.getString(cursor.getColumnIndex("telefone")));
+            aluno.setSite(cursor.getString(cursor.getColumnIndex("site")));
+            aluno.setNota(cursor.getDouble(cursor.getColumnIndex("nota")));
+            aluno.setCaminhoFoto(cursor.getString(cursor.getColumnIndex("caminhoFoto")));
 
         }
         cursor.close();
@@ -225,5 +227,29 @@ public class AlunoDAO extends SQLiteOpenHelper {
         return values;
     }
 
+
+    public void sincronizar(List<Aluno> alunos) {
+
+        for (Aluno aluno : alunos) {
+            // Pra não ficar inserindo todas as vezes que subir o app.
+            if (existe(aluno)) {
+                atualizar(aluno);
+            } else {
+                inserir(aluno);
+            }
+        }
+
+        close();
+    }
+
+    private boolean existe(Aluno aluno) {
+        SQLiteDatabase writable = getWritableDatabase();
+
+        String sql = "SELECT id FROM Alunos WHERE id = ? ";
+
+        Cursor cursor = writable.rawQuery(sql, new String[]{aluno.getId()});
+
+        return cursor.getCount() > 1;
+    }
 
 }
