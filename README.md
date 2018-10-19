@@ -4,7 +4,7 @@
 - [x] **Android I: Crie sua App fantástica com Android Studio**
 - [x] **Android II: Integração com apps e recursos do device**
 - [x] **Android III: Aprimore sua app com Fragments, Google Maps e GPS**
-- [ ] **Android com Web Service parte 1: Sincronize sua app com o servidor**
+- [x] **Android com Web Service parte 1: Sincronize sua app com o servidor**
 - [ ]  **Android com Web Service parte 2: mais técnicas de sincronização**
 - [ ]  **Android com Web Service parte 3: Sincronização em modo offline**
 
