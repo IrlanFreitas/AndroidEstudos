@@ -13,11 +13,11 @@ Futuramente será descrito todos os cursos e passo-a-passo do que está sendo fe
 
 ## 1.  Android essencial
 
-- [ ] **Android I: Android I: Crie sua App fantástica com Android Studio**
-- [ ] **Android II: Integração com apps e recursos do device**
-- [ ] **Android III: Aprimore sua app com Fragments, Google Maps e GPS**
+- [x] **Android I: Android I: Crie sua App fantástica com Android Studio**
+- [x] **Android II: Integração com apps e recursos do device**
+- [x] **Android III: Aprimore sua app com Fragments, Google Maps e GPS**
 - [ ] Como corrigir a orientação das fotos no Android
-- [ ] Criando caixas de diálogo no Android (Dialogs)
+- [x] Criando caixas de diálogo no Android (Dialogs)
 - [ ] **Desenvolvimento Android – Hipsters #39**
 
 ## 2. Layouts complexos
@@ -40,7 +40,7 @@ Futuramente será descrito todos os cursos e passo-a-passo do que está sendo fe
 ## 4.  Integração com APIs
 
 - [ ] Alura Live: Bibliotecas no Android
-- [ ] **Android com Web Service parte 1: Sincronize sua app com o servidor**
+- [x] **Android com Web Service parte 1: Sincronize sua app com o servidor**
 - [ ] **Android com Web Service parte 2: mais técnicas de sincronização**
 - [ ] **Android com Web Service parte 3: sincronização em modo offline**
 - [ ] O que é Push Notification?
