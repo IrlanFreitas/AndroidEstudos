@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">Contacts</string>
-    <string name="app_form_name">Form</string>
-    <string name="formulario_nome">Name</string>
-    <string name="formulario_endereco">Address</string>
-    <string name="formulario_telefone">Phone</string>
-    <string name="formulario_site">Site</string>
-</resources>
