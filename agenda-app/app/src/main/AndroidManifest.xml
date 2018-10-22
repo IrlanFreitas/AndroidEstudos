@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="br.com.alura.agenda">
+
+    <!-- Solicitar ao usuário permissão para ligar -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!-- Solicitar permissão do usuário para ler os SMS -->
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <!-- Solicitando permissão de internet para enviar os dados para o servirdor -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Solicitando permissão de GPS para utilização do serviço -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. 
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <activity android:name=".activities.ListaAlunosActivity">
+
+            <!-- Intenções do App são designados pelo Intent Filter -->
+            <intent-filter>
+
+                <!-- Indicando também é a Activity principal -->
+                <action android:name="android.intent.action.MAIN" />
+
+                <!--
+                     Qualquer aplicação puder lançar esse app, encontrará essa activie
+                    por isso aparece na tela de app's, instalados
+                -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.FormularioActivity"
+            android:label="@string/app_form_name" />
+        <activity
+            android:name=".activities.InformacoesActivity"
+            android:label="Aluno" />
+
+        <!--
+         Somente declarar não é suficiente, é necessário
+         saber qual evento será tratado, pois há muitos como:
+         bateria baixa, mudança de conectividade (4g -> wi-fi) etc...
+        -->
+        <receiver android:name=".receivers.SMSReceiver">
+            <intent-filter>
+                //Tratando somente os eventos de SMS recebido
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".activities.ProvasActivity"
+            android:label="Provas" />
+        <activity android:name=".activities.DetalhesProvaActivity" />
+        <activity android:name=".activities.ProvasTabletActivity" />
+
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps" />
+
+        <activity android:name=".activities.MapaActivity"
+                android:label="Mapa"/>
+    </application>
+
+</manifest>
